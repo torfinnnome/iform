@@ -12,5 +12,9 @@
     "suggestions": "Suggestions",
     "average_pace_label": "Average Pace (min/km)",
     "total_distance_label": "Total Distance (km)",
-    "analyzing_data": "iform AI is analyzing your data..."
+    "analyzing_data": "iform AI is analyzing your data...",
+    "loading_activities": "Loading activities...",
+    "special_considerations_title": "Special Considerations",
+    "special_considerations_placeholder": "e.g., I recently had a meniscus operation; I have a marathon next month.",
+    "recalculate_analysis": "Recalculate Analysis"
 }

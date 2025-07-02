@@ -15,6 +15,10 @@ async function setLanguage(lang) {
             const key = elem.getAttribute('data-i18n');
             if (translations[lang][key]) elem.innerHTML = translations[lang][key];
         });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(elem => {
+            const key = elem.getAttribute('data-i18n-placeholder');
+            if (translations[lang][key]) elem.placeholder = translations[lang][key];
+        });
         document.documentElement.lang = lang;
         localStorage.setItem('selectedLang', lang); // Save selected language
     } catch (error) {
@@ -57,7 +61,7 @@ async function checkAuthState() {
 async function fetchActivities() {
     const activitiesList = document.getElementById('activities-list');
     const analyzeButton = document.getElementById('analyze-activities');
-    activitiesList.innerHTML = '<p>Loading activities...</p>';
+    activitiesList.innerHTML = `<p>${translations[document.documentElement.lang]['loading_activities'] || 'Loading activities...'}</p>`;
     analyzeButton.classList.add('hidden');
 
     try {
@@ -89,6 +93,7 @@ async function fetchActivities() {
         });
         activitiesList.appendChild(ul);
         analyzeButton.classList.remove('hidden'); // Show analyze button
+        document.getElementById('special-considerations-section').classList.remove('hidden');
 
     } catch (error) {
         console.error('Failed to fetch activities:', error);
@@ -158,6 +163,7 @@ function calculateTrendData(activities) {
 async function analyzeActivities() {
     const analysisResult = document.getElementById('analysis-result');
     const analysisSection = document.getElementById('analysis-section');
+    const specialConsiderations = document.getElementById('special-considerations-input').value;
     analysisSection.classList.remove('hidden');
     analysisResult.innerHTML = `<p>${translations[document.documentElement.lang]['analyzing_data'] || 'iform AI is analyzing your data...'}</p>`;
 
@@ -165,10 +171,11 @@ async function analyzeActivities() {
         const response = await fetch('/api/analyze/activities', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                activities: fetchedActivities,
-                lang: document.documentElement.lang
-            }),
+            body: JSON.stringify({
+            activities: fetchedActivities,
+            lang: document.documentElement.lang,
+            special_considerations: specialConsiderations
+        }),
         });
 
         const analysis = await response.json();
@@ -240,6 +247,7 @@ document.getElementById('theme-switcher').addEventListener('click', toggleTheme)
 document.getElementById('strava-connect').addEventListener('click', () => { window.location.href = '/api/strava/connect'; });
 document.getElementById('fetch-activities').addEventListener('click', fetchActivities);
 document.getElementById('analyze-activities').addEventListener('click', analyzeActivities);
+document.getElementById('recalculate-analysis').addEventListener('click', analyzeActivities);
 
 // --- Initial Load ---
 document.addEventListener('DOMContentLoaded', () => {

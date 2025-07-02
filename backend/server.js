@@ -25,6 +25,12 @@ const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
 const tokenStore = {};
 
 // --- MIDDLEWARE ---
+app.use((req, res, next) => {
+    const now = new Date().toISOString();
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    console.log(`[${now}] ${ip} - ${req.method} ${req.originalUrl}`);
+    next();
+});
 app.use(express.static(path.join(__dirname, '../frontend')));
 app.use(express.json()); // To parse JSON bodies
 
@@ -101,13 +107,13 @@ app.get('/api/strava/activities', async (req, res) => {
 
 // Analyze activities with Google Gemini
 app.post('/api/analyze/activities', async (req, res) => {
-    const { activities, lang } = req.body;
+    const { activities, lang, special_considerations } = req.body;
 
     if (!activities || activities.length === 0) {
         return res.status(400).send({ error: 'No activities provided for analysis.' });
     }
 
-    const prompt = generateAnalysisPrompt(activities, lang);
+    const prompt = generateAnalysisPrompt(activities, lang, special_considerations);
 
     try {
         const result = await model.generateContent(prompt);
@@ -130,7 +136,7 @@ app.post('/api/analyze/activities', async (req, res) => {
 
 
 // --- HELPER FUNCTIONS ---
-function generateAnalysisPrompt(activities, lang = 'en') {
+function generateAnalysisPrompt(activities, lang = 'en', special_considerations = '') {
     const activitySummary = activities.map(a => ({
         name: a.name,
         distance: (a.distance / 1000).toFixed(2), // in km
@@ -156,9 +162,15 @@ function generateAnalysisPrompt(activities, lang = 'en') {
     const summaryKey = translations.summary || "summary";
     const suggestionsKey = translations.suggestions || "suggestions";
 
-    return `
+    let prompt = `
 You are an expert running coach named "iform AI". Your task is to analyze a runner's last 6 months of Strava data.
-The user's preferred language is ${lang}. Please provide your entire response in this language.
+The user's preferred language is ${lang}. Please provide your entire response in this language.`;
+
+    if (special_considerations) {
+        prompt += `\n\nIMPORTANT: The user has provided the following special considerations that you MUST take into account when creating suggestions: "${special_considerations}". Your suggestions should be safe and appropriate given these considerations.`;
+    }
+
+    prompt += `
 
 Here is the data:
 ${JSON.stringify(activitySummary, null, 2)}
@@ -191,6 +203,8 @@ Important instructions for the JSON content:
 - For "trendData.datasets", provide placeholder data. The actual calculations will be done on the client-side.
 - Ensure all text in "${summaryKey}" and "${suggestionsKey}" is in ${lang}.
 `;
+
+    return prompt;
 }
 
 

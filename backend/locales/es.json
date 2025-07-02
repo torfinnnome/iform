@@ -8,5 +8,9 @@
     "welcome_title": "Bienvenido a iform",
     "analysis_title": "Tu análisis impulsado por IA",
     "analyze_activities": "Analizar actividades",
-    "analyzing_data": "iform AI está analizando tus datos..."
+    "analyzing_data": "iform AI está analizando tus datos...",
+    "loading_activities": "Cargando actividades...",
+    "special_considerations_title": "Consideraciones especiales",
+    "special_considerations_placeholder": "ej., Recientemente tuve una operación de menisco; Tengo un maratón el próximo mes.",
+    "recalculate_analysis": "Recalcular análisis"
 }
