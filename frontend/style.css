@@ -113,6 +113,17 @@ select:hover, button:not(.button-primary, .button-secondary):hover {
 [data-theme="dark"] .moon { display: none; }
 [data-theme="light"] .sun { display: block; }
 
+.github-icon {
+    width: 24px;
+    height: 24px;
+    fill: hsl(var(--foreground));
+    transition: fill 0.2s;
+}
+
+.github-icon:hover {
+    fill: hsl(var(--accent));
+}
+
 main {
     text-align: center;
 }

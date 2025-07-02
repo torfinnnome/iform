@@ -258,4 +258,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     checkAuthState();
+    fetchGithubUrl();
 });
+
+async function fetchGithubUrl() {
+    try {
+        const response = await fetch('/api/github_url');
+        const data = await response.json();
+        if (data.url) {
+            document.getElementById('github-link').href = data.url;
+        }
+    } catch (error) {
+        console.error('Error fetching GitHub URL:', error);
+    }
+}

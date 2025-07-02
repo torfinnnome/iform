@@ -47,6 +47,10 @@ app.get('/api/strava/status', (req, res) => {
     res.send({ authenticated: !!tokenStore.accessToken });
 });
 
+app.get('/api/github_url', (req, res) => {
+    res.send({ url: process.env.GITHUB_URL });
+});
+
 // Strava connect redirect
 app.get('/api/strava/connect', (req, res) => {
     const stravaAuthUrl = `https://www.strava.com/oauth/authorize?client_id=${STRAVA_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=read,activity:read_all`;
