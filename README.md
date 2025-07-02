@@ -15,6 +15,7 @@ This project was initially created as a demonstration of the Gemini CLI's capabi
     *   A summary of your recent training period.
     *   Concrete, actionable suggestions for improvement.
     *   A trend analysis chart visualizing your average pace and total distance over the last six months.
+*   **Special Considerations Input:** Provide additional context (e.g., injuries, upcoming events) to the AI for more tailored and safe training suggestions.
 *   **Multi-language Support:** The user interface is available in English, Norwegian, and Spanish.
 *   **Light & Dark Mode:** Switch between light and dark themes for your viewing preference.
 
