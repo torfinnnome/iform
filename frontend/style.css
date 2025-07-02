@@ -214,6 +214,11 @@ main {
     resize: vertical;
 }
 
+#special-considerations-section .button-primary {
+    margin-top: 1rem;
+    width: 100%;
+}
+
 
 #activities-list {
     margin-top: 2rem;

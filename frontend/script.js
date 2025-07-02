@@ -60,9 +60,7 @@ async function checkAuthState() {
 // Function to fetch and display activities
 async function fetchActivities() {
     const activitiesList = document.getElementById('activities-list');
-    const analyzeButton = document.getElementById('analyze-activities');
     activitiesList.innerHTML = `<p>${translations[document.documentElement.lang]['loading_activities'] || 'Loading activities...'}</p>`;
-    analyzeButton.classList.add('hidden');
 
     try {
         const response = await fetch('/api/strava/activities');
@@ -92,7 +90,6 @@ async function fetchActivities() {
             ul.appendChild(li);
         });
         activitiesList.appendChild(ul);
-        analyzeButton.classList.remove('hidden'); // Show analyze button
         document.getElementById('special-considerations-section').classList.remove('hidden');
 
     } catch (error) {
@@ -247,7 +244,6 @@ document.getElementById('theme-switcher').addEventListener('click', toggleTheme)
 document.getElementById('strava-connect').addEventListener('click', () => { window.location.href = '/api/strava/connect'; });
 document.getElementById('fetch-activities').addEventListener('click', fetchActivities);
 document.getElementById('analyze-activities').addEventListener('click', analyzeActivities);
-document.getElementById('recalculate-analysis').addEventListener('click', analyzeActivities);
 
 // --- Initial Load ---
 document.addEventListener('DOMContentLoaded', () => {
