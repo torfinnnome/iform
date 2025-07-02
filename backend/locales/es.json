@@ -1,0 +1,12 @@
+{
+    "title": "iform",
+    "header": "iform",
+    "description": "Conéctate con Strava para analizar tu entrenamiento y obtener información impulsada por IA.",
+    "connect_strava": "Conectar con Strava",
+    "toggle_theme": "Cambiar tema",
+    "fetch_activities": "Obtener actividades",
+    "welcome_title": "Bienvenido a iform",
+    "analysis_title": "Tu análisis impulsado por IA",
+    "analyze_activities": "Analizar actividades",
+    "analyzing_data": "iform AI está analizando tus datos..."
+}

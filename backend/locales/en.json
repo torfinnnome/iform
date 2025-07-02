@@ -1,0 +1,16 @@
+{
+    "title": "iform",
+    "header": "iform",
+    "description": "Connect with Strava to analyze your training and get AI-powered insights.",
+    "connect_strava": "Connect with Strava",
+    "toggle_theme": "Toggle Theme",
+    "fetch_activities": "Fetch Activities",
+    "welcome_title": "Welcome to iform",
+    "analysis_title": "Your AI-Powered Analysis",
+    "analyze_activities": "Analyze Activities",
+    "summary": "Summary",
+    "suggestions": "Suggestions",
+    "average_pace_label": "Average Pace (min/km)",
+    "total_distance_label": "Total Distance (km)",
+    "analyzing_data": "iform AI is analyzing your data..."
+}

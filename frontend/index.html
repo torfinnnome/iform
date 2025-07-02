@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="no" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">iform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><a href="/">iform</a></h1>
+            <div class="controls">
+                <select id="lang-switcher">
+                    <option value="en">English</option>
+                    <option value="no" selected>Norsk</option>
+                    <option value="es">Español</option>
+                </select>
+                <button id="theme-switcher" aria-label="Toggle theme">
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.31 0-6-2.69-6-6 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+                </button>
+            </div>
+        </header>
+        <main>
+            <div id="auth-section">
+                <h2 data-i18n="welcome_title">Welcome to iform</h2>
+                <p data-i18n="description">Connect with Strava to analyze your training and get AI-powered insights.</p>
+                <button id="strava-connect" class="button-primary">
+                    <span data-i18n="connect_strava">Connect with Strava</span>
+                </button>
+            </div>
+
+            <div id="data-section" class="hidden">
+                <div id="activities-controls">
+                    <button id="fetch-activities" class="button-secondary" data-i18n="fetch_activities">Fetch Activities</button>
+                    <button id="analyze-activities" class="button-primary hidden" data-i18n="analyze_activities">Analyze Activities</button>
+                </div>
+                <div id="analysis-section" class="hidden">
+                    <h3 data-i18n="analysis_title">Your AI-Powered Analysis</h3>
+                    <div id="analysis-result"></div>
+                    <div class="chart-container">
+                        <canvas id="trend-chart"></canvas>
+                    </div>
+                </div>
+                <div id="activities-list"></div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

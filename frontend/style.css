@@ -1,0 +1,266 @@
+:root {
+    --font-primary: 'Inter', sans-serif;
+    --font-mono: 'Source Code Pro', monospace;
+
+    /* New Theme - based on the screenshot */
+    --background: 25 15% 15%; /* Dark, slightly warm gray */
+    --foreground: 30 10% 85%; /* Off-white with a hint of warmth */
+    --card: 25 15% 18%;       /* Slightly lighter than background */
+    --card-foreground: 30 10% 85%;
+    --border: 25 10% 30%;
+    --input: 25 10% 25%;
+    --primary: 35 70% 60%;    /* Muted gold/orange */
+    --primary-foreground: 25 15% 10%; /* Dark color for text on primary */
+    --secondary: 30 10% 50%;
+    --secondary-foreground: 30 10% 90%;
+    --accent: 35 70% 60%;     /* Same as primary for this theme */
+    --accent-foreground: 25 15% 10%;
+    --ring: 35 70% 70%;
+    --radius: 0.5rem;
+}
+
+[data-theme="light"] {
+    --background: 30 30% 96%;
+    --foreground: 25 15% 15%;
+    --card: 30 30% 100%;
+    --card-foreground: 25 15% 15%;
+    --border: 30 20% 85%;
+    --input: 30 20% 90%;
+    --primary: 35 65% 55%;
+    --primary-foreground: 30 30% 98%;
+    --secondary: 30 20% 70%;
+    --secondary-foreground: 25 15% 15%;
+    --accent: 35 65% 55%;
+    --accent-foreground: 30 30% 98%;
+    --ring: 35 65% 65%;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-color: hsl(var(--border));
+}
+
+body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid;
+    margin-bottom: 2rem;
+}
+
+header h1 a {
+    color: hsl(var(--foreground));
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+select, button:not(.button-primary, .button-secondary) {
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    border: 1px solid hsl(var(--border));
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+select:hover, button:not(.button-primary, .button-secondary):hover {
+    border-color: hsl(var(--accent));
+}
+
+#theme-switcher {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#theme-switcher svg {
+    width: 20px;
+    height: 20px;
+    fill: hsl(var(--foreground));
+}
+
+[data-theme="dark"] .sun { display: block; }
+[data-theme="light"] .moon { display: none; }
+[data-theme="dark"] .moon { display: none; }
+[data-theme="light"] .sun { display: block; }
+
+main {
+    text-align: center;
+}
+
+#auth-section, #data-section {
+    background-color: hsl(var(--card));
+    padding: 2rem;
+    border-radius: var(--radius);
+    border: 1px solid hsl(var(--border));
+}
+
+#auth-section h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+#auth-section p {
+    font-size: 1.1rem;
+    color: hsl(var(--foreground) / 0.8);
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button-primary {
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+}
+
+.button-primary:hover {
+    background-color: hsl(var(--primary) / 0.9);
+    transform: translateY(-1px);
+}
+
+.button-secondary {
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid hsl(var(--border));
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    background-color: transparent;
+    color: hsl(var(--foreground));
+}
+
+.button-secondary:hover {
+    background-color: hsl(var(--border));
+    border-color: hsl(var(--accent));
+}
+
+#activities-controls {
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+#activities-list {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+#activities-list ul {
+    list-style: none;
+}
+
+#activities-list li {
+    background-color: hsl(var(--background)); /* Slightly darker than the card bg */
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid hsl(var(--border));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#activities-list li strong {
+    color: hsl(var(--foreground));
+    font-size: 1.1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.chart-container {
+    margin-top: 2rem;
+    height: 350px;
+    padding: 1rem;
+    background-color: hsl(var(--background));
+    border-radius: var(--radius);
+    border: 1px solid hsl(var(--border));
+}
+
+#analysis-section {
+    text-align: left;
+}
+
+#analysis-result h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: hsl(var(--accent));
+    border-bottom: 1px solid hsl(var(--border));
+    padding-bottom: 0.5rem;
+}
+
+#analysis-result ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#analysis-result ul li {
+    position: relative;
+    padding-left: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+#analysis-result ul li::before {
+    content: "\2022"; /* Bullet character */
+    color: hsl(var(--accent));
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1.5em;
+    position: absolute;
+    left: 0.75em;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--secondary));
+}

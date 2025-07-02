@@ -1,0 +1,16 @@
+{
+    "title": "iform",
+    "header": "iform",
+    "description": "Koble til Strava for å analysere treningen din og få AI-drevne innsikter.",
+    "connect_strava": "Koble til Strava",
+    "toggle_theme": "Bytt tema",
+    "fetch_activities": "Hent aktiviteter",
+    "welcome_title": "Velkommen til iform",
+    "analysis_title": "Din AI-drevne analyse",
+    "analyze_activities": "Analyser aktiviteter",
+    "summary": "Sammendrag",
+    "suggestions": "Forslag",
+    "average_pace_label": "Gjennomsnittsfart (min/km)",
+    "total_distance_label": "Total distanse (km)",
+    "analyzing_data": "iform AI analyserer dataene dine..."
+}
