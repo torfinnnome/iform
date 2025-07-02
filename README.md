@@ -4,6 +4,10 @@
 
 This project was initially created as a demonstration of the Gemini CLI's capabilities and has evolved into a functional tool for personal training analysis.
 
+## Screenshot
+
+![iform screenshot](shot0.png)
+
 ## Features
 
 *   **Strava Integration:** Securely connect your Strava account to fetch your last six months of activity data.
