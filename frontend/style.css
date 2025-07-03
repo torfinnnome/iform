@@ -65,6 +65,21 @@ header {
     margin-bottom: 2rem;
 }
 
+a {
+    color: hsl(var(--accent));
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: hsl(var(--accent) / 0.8);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: hsl(var(--accent) / 0.9);
+}
+
 header h1 a {
     color: hsl(var(--foreground));
     text-decoration: none;
@@ -163,6 +178,18 @@ main {
 .button-primary:hover {
     background-color: hsl(var(--primary) / 0.9);
     transform: translateY(-1px);
+}
+
+#auth-section .warning-message,
+#analysis-section .warning-message {
+    color: hsl(var(--muted-foreground));
+    font-size: 10px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 0.8em;
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    background-color: hsl(var(--card));
 }
 
 .button-secondary {

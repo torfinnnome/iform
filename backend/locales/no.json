@@ -17,5 +17,8 @@
     "special_considerations_title": "Spesielle hensyn",
     "special_considerations_placeholder": "f.eks. Jeg har nylig hatt en meniskoperasjon; Jeg har et maraton neste måned.",
     "recalculate_analysis": "Beregn analyse på nytt",
-    "logout": "Logg ut"
+    "logout": "Logg ut",
+    "privacy_warning": "Ved å koble til Strava gir du iform tilgang til aktivitetsdataene dine. Disse dataene brukes kun til analyse og lagres ikke permanent på våre servere. Vær imidlertid oppmerksom på at deling av dataene dine med tredjepartsapplikasjoner alltid medfører iboende personvernrisiko. Vennligst se Stravas personvernregler og prosjektets README for mer informasjon.",
+    "ai_reliability_warning": "Den AI-drevne analysen og forslagene genereres av en kunstig intelligensmodell. Selv om disse forslagene er ment å være nyttige, bør de ikke betraktes som profesjonell medisinsk eller treningsrådgivning. Rådfør deg alltid med en kvalifisert fagperson før du gjør betydelige endringer i treningsregimet ditt, spesielt hvis du har helseproblemer eller skader. AI-ens utdata kan inneholde unøyaktigheter eller skjevheter.",
+    "logout_reminder": "Vennligst klikk på Logg ut-knappen etter å ha sett disse dataene, da Strava kun tillater én bruker om gangen."
 }

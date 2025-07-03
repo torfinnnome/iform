@@ -13,7 +13,15 @@ async function setLanguage(lang) {
 
         document.querySelectorAll('[data-i18n]').forEach(elem => {
             const key = elem.getAttribute('data-i18n');
-            if (translations[lang][key]) elem.innerHTML = translations[lang][key];
+            if (key === 'privacy_warning') {
+                const stravaPrivacyPolicyUrl = 'https://www.strava.com/legal/privacy';
+                const githubReadmeUrl = document.getElementById('github-link').href; // Assuming github-link is already set
+                elem.innerHTML = translations[lang][key]
+                    .replace('Strava\'s privacy policy', `<a href="${stravaPrivacyPolicyUrl}" target="_blank">Strava\'s privacy policy</a>`)
+                    .replace('our project\'s README', `<a href="${githubReadmeUrl}" target="_blank">our project\'s README</a>`);
+            } else if (translations[lang][key]) {
+                elem.innerHTML = translations[lang][key];
+            }
         });
         document.querySelectorAll('[data-i18n-placeholder]').forEach(elem => {
             const key = elem.getAttribute('data-i18n-placeholder');
@@ -93,6 +101,7 @@ async function fetchActivities() {
         });
         activitiesList.appendChild(ul);
         document.getElementById('special-considerations-section').classList.remove('hidden');
+        document.getElementById('activities-controls').classList.remove('hidden');
 
     } catch (error) {
         console.error('Failed to fetch activities:', error);
@@ -200,6 +209,10 @@ function displayAnalysis(analysis) {
     const summaryKey = translations[document.documentElement.lang].summary;
     const suggestionsKey = translations[document.documentElement.lang].suggestions;
 
+    // Replace fetch activities button with logout reminder
+    const activitiesControls = document.getElementById('activities-controls');
+    activitiesControls.innerHTML = `<p class="warning-message">${translations[document.documentElement.lang]['logout_reminder']}</p>`;
+
     const summary = analysis[summaryKey] || 'No summary available.';
     const suggestions = Array.isArray(analysis[suggestionsKey]) ? analysis[suggestionsKey] : ['No suggestions available.'];
 
@@ -259,6 +272,11 @@ async function logout() {
             document.getElementById('special-considerations-input').value = '';
             document.getElementById('analysis-section').classList.add('hidden');
             document.getElementById('special-considerations-section').classList.add('hidden');
+
+            // Restore the fetch activities button
+            const activitiesControls = document.getElementById('activities-controls');
+            activitiesControls.innerHTML = `<button id="fetch-activities" class="button-secondary" data-i18n="fetch_activities">${translations[document.documentElement.lang]['fetch_activities']}</button>`;
+            document.getElementById('fetch-activities').addEventListener('click', fetchActivities);
 
             // Destroy chart if it exists
             if (trendChart) {

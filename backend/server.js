@@ -63,7 +63,21 @@ app.get('/api/github_url', (req, res) => {
     res.send({ url: process.env.GITHUB_URL });
 });
 
-app.post('/api/logout', (req, res) => {
+app.post('/api/logout', async (req, res) => {
+    if (req.session.stravaTokens && req.session.stravaTokens.accessToken) {
+        try {
+            await axios.post('https://www.strava.com/oauth/deauthorize', null, {
+                params: {
+                    access_token: req.session.stravaTokens.accessToken
+                }
+            });
+            console.log('Strava deauthorization successful.');
+        } catch (error) {
+            console.error('Error deauthorizing Strava token:', error.response ? error.response.data : error.message);
+            // Continue with local logout even if Strava deauthorization fails
+        }
+    }
+
     req.session.destroy(err => {
         if (err) {
             return res.status(500).send('Could not log out.');

@@ -13,5 +13,8 @@
     "special_considerations_title": "Consideraciones especiales",
     "special_considerations_placeholder": "ej., Recientemente tuve una operación de menisco; Tengo un maratón el próximo mes.",
     "recalculate_analysis": "Recalcular análisis",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "privacy_warning": "Al conectarte con Strava, otorgas a iform acceso a tus datos de actividad. Estos datos se utilizan solo para análisis y no se almacenan permanentemente en nuestros servidores. Sin embargo, ten en cuenta que compartir tus datos con aplicaciones de terceros siempre conlleva riesgos de privacidad inherentes. Revisa la política de privacidad de Strava y el README de nuestro proyecto para obtener más detalles.",
+    "ai_reliability_warning": "El análisis y las sugerencias impulsadas por IA son generadas por un modelo de inteligencia artificial. Aunque están diseñadas para ser útiles, estas sugerencias no deben considerarse asesoramiento médico o de entrenamiento profesional. Consulta siempre con un profesional calificado antes de realizar cambios significativos en tu régimen de entrenamiento, especialmente si tienes problemas de salud o lesiones. La salida de la IA puede contener imprecisiones o sesgos.",
+    "logout_reminder": "Por favor, haz clic en el botón Cerrar sesión después de ver estos datos, ya que Strava solo permite un usuario a la vez."
 }
