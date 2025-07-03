@@ -63,6 +63,16 @@ app.get('/api/github_url', (req, res) => {
     res.send({ url: process.env.GITHUB_URL });
 });
 
+app.post('/api/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).send('Could not log out.');
+        }
+        res.clearCookie('connect.sid'); // Clear session cookie
+        res.send('Logged out successfully.');
+    });
+});
+
 // Strava connect redirect
 app.get('/api/strava/connect', (req, res) => {
     const stravaAuthUrl = `https://www.strava.com/oauth/authorize?client_id=${STRAVA_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=read,activity:read_all`;

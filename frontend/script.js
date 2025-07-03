@@ -48,9 +48,11 @@ async function checkAuthState() {
         if (data.authenticated) {
             authSection.classList.add('hidden');
             dataSection.classList.remove('hidden');
+            document.getElementById('logout-button').classList.remove('hidden');
         } else {
             authSection.classList.remove('hidden');
             dataSection.classList.add('hidden');
+            document.getElementById('logout-button').classList.add('hidden');
         }
     } catch (error) {
         console.error('Error checking auth state:', error);
@@ -244,6 +246,34 @@ document.getElementById('theme-switcher').addEventListener('click', toggleTheme)
 document.getElementById('strava-connect').addEventListener('click', () => { window.location.href = '/api/strava/connect'; });
 document.getElementById('fetch-activities').addEventListener('click', fetchActivities);
 document.getElementById('analyze-activities').addEventListener('click', analyzeActivities);
+document.getElementById('logout-button').addEventListener('click', logout);
+
+async function logout() {
+    try {
+        const response = await fetch('/api/logout', { method: 'POST' });
+        if (response.ok) {
+            // Clear fetched activities and analysis
+            fetchedActivities = [];
+            document.getElementById('activities-list').innerHTML = '';
+            document.getElementById('analysis-result').innerHTML = '';
+            document.getElementById('special-considerations-input').value = '';
+            document.getElementById('analysis-section').classList.add('hidden');
+            document.getElementById('special-considerations-section').classList.add('hidden');
+
+            // Destroy chart if it exists
+            if (trendChart) {
+                trendChart.destroy();
+                trendChart = null;
+            }
+
+            checkAuthState(); // Update UI to logged out state
+        } else {
+            console.error('Logout failed:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error during logout:', error);
+    }
+}
 
 // --- Initial Load ---
 document.addEventListener('DOMContentLoaded', () => {

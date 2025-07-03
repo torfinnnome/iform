@@ -12,5 +12,6 @@
     "loading_activities": "Cargando actividades...",
     "special_considerations_title": "Consideraciones especiales",
     "special_considerations_placeholder": "ej., Recientemente tuve una operación de menisco; Tengo un maratón el próximo mes.",
-    "recalculate_analysis": "Recalcular análisis"
+    "recalculate_analysis": "Recalcular análisis",
+    "logout": "Cerrar sesión"
 }

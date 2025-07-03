@@ -16,5 +16,6 @@
     "loading_activities": "Laster aktiviteter...",
     "special_considerations_title": "Spesielle hensyn",
     "special_considerations_placeholder": "f.eks. Jeg har nylig hatt en meniskoperasjon; Jeg har et maraton neste måned.",
-    "recalculate_analysis": "Analyser på nytt"
+    "recalculate_analysis": "Beregn analyse på nytt",
+    "logout": "Logg ut"
 }
