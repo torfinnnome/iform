@@ -56,7 +56,15 @@ To run this project locally, you will need to have Node.js installed.
     GOOGLE_API_KEY=your_google_api_key
     REDIRECT_URI=http://localhost:3000/api/strava/callback
     GEMINI_MODEL=gemini-2.0-flash
+    SESSION_SECRET=your_very_secret_session_key
     ```
+
+    **Generating a secure `SESSION_SECRET`:**
+    For production environments, it is crucial to use a strong, randomly generated string for `SESSION_SECRET`. You can generate one using `openssl`:
+    ```bash
+    openssl rand -base64 32
+    ```
+    Replace `your_very_secret_session_key` with the output of this command.
 
 4.  **Start the server:**
     ```bash

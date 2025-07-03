@@ -1,6 +1,7 @@
 
 require('dotenv').config();
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const fs = require('fs');
 const axios = require('axios');
@@ -15,16 +16,21 @@ const STRAVA_CLIENT_SECRET = process.env.STRAVA_CLIENT_SECRET;
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 const GEMINI_MODEL = process.env.GEMINI_MODEL;
+const SESSION_SECRET = process.env.SESSION_SECRET;
 
 // --- INITIALIZATION ---
 const genAI = new GoogleGenerativeAI(GOOGLE_API_KEY);
 // const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
 const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
 
-// Simple in-memory store for tokens
-const tokenStore = {};
-
 // --- MIDDLEWARE ---
+app.use(session({
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: process.env.NODE_ENV === 'production' } // Use secure cookies in production
+}));
+
 app.use((req, res, next) => {
     const now = new Date().toISOString();
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -50,7 +56,7 @@ app.get('/api/lang/:lang', (req, res) => {
 
 // Strava authentication status
 app.get('/api/strava/status', (req, res) => {
-    res.send({ authenticated: !!tokenStore.accessToken });
+    res.send({ authenticated: !!req.session.stravaTokens });
 });
 
 app.get('/api/github_url', (req, res) => {
@@ -76,9 +82,11 @@ app.get('/api/strava/callback', async (req, res) => {
             code,
             grant_type: 'authorization_code',
         });
-        tokenStore.accessToken = response.data.access_token;
-        tokenStore.refreshToken = response.data.refresh_token;
-        tokenStore.expiresAt = response.data.expires_at;
+        req.session.stravaTokens = {
+            accessToken: response.data.access_token,
+            refreshToken: response.data.refresh_token,
+            expiresAt: response.data.expires_at
+        };
         res.redirect('/');
     } catch (error) {
         console.error('Error exchanging authorization code:', error.response ? error.response.data : error.message);
@@ -88,14 +96,14 @@ app.get('/api/strava/callback', async (req, res) => {
 
 // Fetch Strava activities
 app.get('/api/strava/activities', async (req, res) => {
-    if (!tokenStore.accessToken) {
+    if (!req.session.stravaTokens || !req.session.stravaTokens.accessToken) {
         return res.status(401).send({ error: 'Not authenticated with Strava.' });
     }
     // A robust implementation would handle token refresh
     const sixMonthsAgo = Math.floor(new Date(new Date().setMonth(new Date().getMonth() - 6)).getTime() / 1000);
     try {
         const response = await axios.get('https://www.strava.com/api/v3/athlete/activities', {
-            headers: { Authorization: `Bearer ${tokenStore.accessToken}` },
+            headers: { Authorization: `Bearer ${req.session.stravaTokens.accessToken}` },
             params: { after: sixMonthsAgo, per_page: 200 }
         });
         res.send(response.data);
